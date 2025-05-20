@@ -1,0 +1,21 @@
+{
+  "name": "mario/laravel-document-detector",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "MarioDevv",
+      "email": "perezmario.info@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Mario\\LaravelDocumentDetector\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "google/cloud-vision": "^2.0",
+    "intervention/image": "^3.11"
+  }
+}

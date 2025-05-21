@@ -4,33 +4,35 @@
 namespace MarioDevv\LaravelDocumentDetector\Tests\Integration;
 
 
-use MarioDevv\LaravelDocumentDetector\Services\FieldDictionary;
-use MarioDevv\LaravelDocumentDetector\Services\FuzzyDictionaryParser;
+use Dotenv\Dotenv;
+use MarioDevv\LaravelDocumentDetector\Services\OpenAIOcrService;
 use PHPUnit\Framework\TestCase;
 use MarioDevv\LaravelDocumentDetector\DocumentDetector;
 use MarioDevv\LaravelDocumentDetector\Services\ImagePreprocessor;
-use MarioDevv\LaravelDocumentDetector\Services\LanguageDetectorService;
 use MarioDevv\LaravelDocumentDetector\Services\ImageEnhancer;
-use MarioDevv\LaravelDocumentDetector\Services\VisionOcrService;
 
 class DocumentDetectorIntegrationTest extends TestCase
 {
+
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+        Dotenv::createImmutable(__DIR__ . '/../../')->load();
+    }
+
+
     public function testScanPipeline()
     {
         $detector = new DocumentDetector(
             new ImagePreprocessor(),
             new ImageEnhancer(),
-            new VisionOcrService(),
-            new FuzzyDictionaryParser(
-                new FieldDictionary(require __DIR__ . '/../../src/config/dictionary.php'),
-                new LanguageDetectorService()
-            ),
+            new OpenAIOcrService(env('OPEN_AI_API_KEY'), 'gpt-4o'),
         );
 
-        $result = $detector->scan(__DIR__ . '/../../documents/german.png');
-        var_dump($result);
+        $result = $detector->scan(__DIR__ . '/../../documents/de/german2.png');
+
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('surname', $result);
-        $this->assertArrayHasKey('number', $result);
+        $this->assertArrayHasKey('id_number', $result);
     }
 }

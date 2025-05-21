@@ -3,10 +3,8 @@
 namespace MarioDevv\LaravelDocumentDetector;
 
 use MarioDevv\LaravelDocumentDetector\Contracts\PreprocessorInterface;
-use MarioDevv\LaravelDocumentDetector\Contracts\LangDetector;
 use MarioDevv\LaravelDocumentDetector\Contracts\EnhancerInterface;
 use MarioDevv\LaravelDocumentDetector\Contracts\OcrServiceInterface;
-use MarioDevv\LaravelDocumentDetector\Contracts\ParserInterface;
 
 class DocumentDetector
 {
@@ -14,7 +12,6 @@ class DocumentDetector
         protected PreprocessorInterface $preprocessor,
         protected EnhancerInterface     $enhancer,
         protected OcrServiceInterface   $ocrService,
-        protected ParserInterface       $parser
     )
     {
     }
@@ -29,8 +26,6 @@ class DocumentDetector
         $enhancedImg = $this->enhancer->enhance($img);
 
         // Extraemos el texto de la imagen
-        $text = $this->ocrService->extractText($enhancedImg);
-
-        return $this->parser->parse($text);
+        return $this->ocrService->extractData($enhancedImg);
     }
 }

@@ -11,7 +11,7 @@ class ImageEnhancerTest extends TestCase
     public function testEnhanceSharpenAndContrast()
     {
         $manager = ImageManager::imagick();
-        $fixture = __DIR__ . '/../../document.png';
+        $fixture = __DIR__ . '/../../documents/es/spanish.png';
 
         $imgOriginal = $manager->read($fixture);
         $imgForEnh   = $manager->read($fixture);

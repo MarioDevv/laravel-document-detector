@@ -4,13 +4,14 @@
 namespace MarioDevv\LaravelDocumentDetector\Tests\Integration;
 
 
+use MarioDevv\LaravelDocumentDetector\Services\FieldDictionary;
+use MarioDevv\LaravelDocumentDetector\Services\FuzzyDictionaryParser;
 use PHPUnit\Framework\TestCase;
 use MarioDevv\LaravelDocumentDetector\DocumentDetector;
 use MarioDevv\LaravelDocumentDetector\Services\ImagePreprocessor;
 use MarioDevv\LaravelDocumentDetector\Services\LanguageDetectorService;
 use MarioDevv\LaravelDocumentDetector\Services\ImageEnhancer;
 use MarioDevv\LaravelDocumentDetector\Services\VisionOcrService;
-use MarioDevv\LaravelDocumentDetector\Services\RegexFieldParser;
 
 class DocumentDetectorIntegrationTest extends TestCase
 {
@@ -18,15 +19,18 @@ class DocumentDetectorIntegrationTest extends TestCase
     {
         $detector = new DocumentDetector(
             new ImagePreprocessor(),
-            new LanguageDetectorService('projects/PROJECT/locations/us/processors/processor-id'),
             new ImageEnhancer(),
             new VisionOcrService(),
-            new RegexFieldParser()
+            new FuzzyDictionaryParser(
+                new FieldDictionary(require __DIR__ . '/../../src/config/dictionary.php'),
+                new LanguageDetectorService()
+            ),
         );
 
-        $result = $detector->scan(__DIR__ . '/../fixtures/test-document.png');
+        $result = $detector->scan(__DIR__ . '/../../document.png');
+        var_dump($result);
         $this->assertArrayHasKey('name', $result);
+        $this->assertArrayHasKey('surname', $result);
         $this->assertArrayHasKey('number', $result);
-        $this->assertArrayHasKey('dob', $result);
     }
 }

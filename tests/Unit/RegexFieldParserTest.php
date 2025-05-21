@@ -3,14 +3,14 @@
 namespace MarioDevv\LaravelDocumentDetector\Tests\Unit;
 
 
-use MarioDevv\LaravelDocumentDetector\Services\RegexFieldParser;
+use MarioDevv\LaravelDocumentDetector\Services\FuzzyDictionaryParser;
 use PHPUnit\Framework\TestCase;
 
 class RegexFieldParserTest extends TestCase
 {
     public function testParseExtractsFields()
     {
-        $parser = new RegexFieldParser();
+        $parser = new FuzzyDictionaryParser();
         $text   = "Name: John Doe
                    Document No: 123456
                    Date of Birth: 01/01/1990

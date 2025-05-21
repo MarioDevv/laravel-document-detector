@@ -12,7 +12,6 @@ class DocumentDetector
 {
     public function __construct(
         protected PreprocessorInterface $preprocessor,
-        protected LangDetector          $regionDetector,
         protected EnhancerInterface     $enhancer,
         protected OcrServiceInterface   $ocrService,
         protected ParserInterface       $parser
@@ -22,10 +21,16 @@ class DocumentDetector
 
     public function scan(string $path): array
     {
-        $stage1 = $this->preprocessor->preprocess($path);
-        $stage2 = $this->regionDetector->detect($stage1);
-        $stage3 = $this->enhancer->enhance($stage2);
-        $text   = $this->ocrService->extractText($stage3);
+
+        // Primero procesamos la imagen para clarificarla y optimizarla
+        $img = $this->preprocessor->preprocess($path);
+
+        // Mejoramos más aún la calidad de la imagen
+        $enhancedImg = $this->enhancer->enhance($img);
+
+        // Extraemos el texto de la imagen
+        $text = $this->ocrService->extractText($enhancedImg);
+
         return $this->parser->parse($text);
     }
 }

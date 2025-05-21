@@ -18,7 +18,7 @@ class DocumentDetectorIntegrationTest extends TestCase
     {
         parent::setUpBeforeClass();
         Dotenv::createImmutable(__DIR__ . '/../../')->load();
-        }
+    }
 
 
     public function testScanPipeline()
@@ -26,7 +26,7 @@ class DocumentDetectorIntegrationTest extends TestCase
         $detector = new DocumentDetector(
             new ImagePreprocessor(),
             new ImageEnhancer(),
-            new OpenAIOcrService(),
+            new OpenAIOcrService(env('OPEN_AI_API_KEY'), 'gpt-4o'),
         );
 
         $result = $detector->scan(__DIR__ . '/../../documents/de/german2.png');

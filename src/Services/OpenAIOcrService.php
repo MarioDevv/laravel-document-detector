@@ -8,15 +8,19 @@ use OpenAI\Client as OpenAIClient;
 
 class OpenAIOcrService implements OcrServiceInterface
 {
-    private OpenAIClient $client;
-    private string       $model = 'gpt-4o';
 
-    public function __construct()
+    private OpenAIClient $client;
+
+    public function __construct(
+        private string $apiKey,
+        private string $model,
+    )
     {
-        $this->client = \OpenAI::client(env('OPEN_AI_API_KEY'));
+        $this->client = \OpenAI::client($this->apiKey);
     }
 
-    public function extractData(Image $img): array
+    public
+    function extractData(Image $img): array
     {
 
         // 3) Preparo mensajes: system con prompt + user con la imagen

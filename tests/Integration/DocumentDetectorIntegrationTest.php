@@ -29,7 +29,7 @@ class DocumentDetectorIntegrationTest extends TestCase
             new OpenAIOcrService(),
         );
 
-        $result = $detector->scan(__DIR__ . '/../../documents/es/spanish.png');
+        $result = $detector->scan(__DIR__ . '/../../documents/de/german2.png');
 
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('surname', $result);

@@ -26,9 +26,6 @@ class DocumentDetector
         $enhancedImg = $this->enhancer->enhance($img);
 
         // Extraemos el texto de la imagen
-        $t = $this->ocrService->extractData($enhancedImg);
-
-        var_dump($t);
-        return $t;
+        return $this->ocrService->extractData($enhancedImg);
     }
 }

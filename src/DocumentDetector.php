@@ -3,7 +3,7 @@
 namespace MarioDevv\LaravelDocumentDetector;
 
 use MarioDevv\LaravelDocumentDetector\Contracts\PreprocessorInterface;
-use MarioDevv\LaravelDocumentDetector\Contracts\DocumentRegionDetectorInterface;
+use MarioDevv\LaravelDocumentDetector\Contracts\LangDetector;
 use MarioDevv\LaravelDocumentDetector\Contracts\EnhancerInterface;
 use MarioDevv\LaravelDocumentDetector\Contracts\OcrServiceInterface;
 use MarioDevv\LaravelDocumentDetector\Contracts\ParserInterface;
@@ -11,11 +11,11 @@ use MarioDevv\LaravelDocumentDetector\Contracts\ParserInterface;
 class DocumentDetector
 {
     public function __construct(
-        protected PreprocessorInterface           $preprocessor,
-        protected DocumentRegionDetectorInterface $regionDetector,
-        protected EnhancerInterface               $enhancer,
-        protected OcrServiceInterface             $ocrService,
-        protected ParserInterface                 $parser
+        protected PreprocessorInterface $preprocessor,
+        protected LangDetector          $regionDetector,
+        protected EnhancerInterface     $enhancer,
+        protected OcrServiceInterface   $ocrService,
+        protected ParserInterface       $parser
     )
     {
     }

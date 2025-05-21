@@ -7,7 +7,7 @@ namespace MarioDevv\LaravelDocumentDetector\Tests\Integration;
 use PHPUnit\Framework\TestCase;
 use MarioDevv\LaravelDocumentDetector\DocumentDetector;
 use MarioDevv\LaravelDocumentDetector\Services\ImagePreprocessor;
-use MarioDevv\LaravelDocumentDetector\Services\DocumentAIRegionDetector;
+use MarioDevv\LaravelDocumentDetector\Services\LanguageDetectorService;
 use MarioDevv\LaravelDocumentDetector\Services\ImageEnhancer;
 use MarioDevv\LaravelDocumentDetector\Services\VisionOcrService;
 use MarioDevv\LaravelDocumentDetector\Services\RegexFieldParser;
@@ -18,7 +18,7 @@ class DocumentDetectorIntegrationTest extends TestCase
     {
         $detector = new DocumentDetector(
             new ImagePreprocessor(),
-            new DocumentAIRegionDetector('projects/PROJECT/locations/us/processors/processor-id'),
+            new LanguageDetectorService('projects/PROJECT/locations/us/processors/processor-id'),
             new ImageEnhancer(),
             new VisionOcrService(),
             new RegexFieldParser()

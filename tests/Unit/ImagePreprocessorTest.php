@@ -9,7 +9,7 @@ class ImagePreprocessorTest extends TestCase
 {
     public function testPreprocessResizesToHeight2000AndReturnsImageInstance()
     {
-        $fixture = __DIR__ . '/../../document.png';
+        $fixture = __DIR__ . '/../../documents/es/spanish.png';
 
         $pre = new ImagePreprocessor();
 

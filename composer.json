@@ -23,7 +23,8 @@
     "google/cloud-document-ai": "^2.2",
     "phpoption/phpoption": "^1.9",
     "patrickschur/language-detection": "^5.3",
-    "openai-php/client": "^0.13.0"
+    "openai-php/client": "^0.13.0",
+    "ext-curl": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^11.5",

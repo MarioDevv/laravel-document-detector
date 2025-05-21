@@ -30,9 +30,9 @@ class DocumentDetectorIntegrationTest extends TestCase
         );
 
         $result = $detector->scan(__DIR__ . '/../../documents/es/spanish.png');
-        var_dump($result);
+
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('surname', $result);
-        $this->assertArrayHasKey('number', $result);
+        $this->assertArrayHasKey('id_number', $result);
     }
 }

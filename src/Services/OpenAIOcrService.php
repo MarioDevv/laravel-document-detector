@@ -62,11 +62,14 @@ class OpenAIOcrService implements OcrServiceInterface
             'temperature' => 0,
         ]);
 
-        // 5) Limpio tmp
-        @unlink($tmpPath);
 
         // 6) Devuelvo el JSON parseado
         $content = $response['choices'][0]['message']['content'] ?? '';
+
+        // 7) Eliminar posibles fences de markdown
+        $content = preg_replace('/^```(?:json)?\s*/', '', $content);
+        $content = preg_replace('/\s*```$/', '', $content);
+
         return json_decode($content, true);
     }
 }

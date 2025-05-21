@@ -1,9 +1,12 @@
 <?php
+// src/config/dictionary.php
+
 return [
 
     'surname' => [
         'es' => [
             'APELLIDOS',
+            'Apellidos',
             'Apellido',
             'Nume Surname',
         ],
@@ -12,8 +15,13 @@ return [
             'Last Name',
         ],
         'de' => [
-            'Name',          // en alemán “Nachname” a veces es “Name”
+            'Name/Surname/Nom',
+            'Name',
             'Nachname',
+            'Geburtsname/Name at birth/Nom de naissance',
+            'Geburtsname',
+            'Name at birth',
+            'Nom de naissance',
         ],
     ],
 
@@ -22,6 +30,7 @@ return [
             'NOMBRE',
             'Nombre',
             'Prenume Given names',
+            'Given names',
         ],
         'en' => [
             'Given Name',
@@ -29,7 +38,10 @@ return [
             'First Name',
         ],
         'de' => [
-            'Vorname',
+            'Vornamen/Given names/Prénoms',
+            'Vornamen',
+            'Given names',
+            'Prénoms',
         ],
     ],
 
@@ -48,7 +60,11 @@ return [
         ],
         'de' => [
             'Ausweis Nr',
+            'Ausweis-Nr',
             'Dokument Nr',
+            'Kartennummer',
+            'ID Number',
+            'Card No',
         ],
     ],
 

@@ -27,7 +27,7 @@ class DocumentDetectorIntegrationTest extends TestCase
             ),
         );
 
-        $result = $detector->scan(__DIR__ . '/../../document.png');
+        $result = $detector->scan(__DIR__ . '/../../documents/german.png');
         var_dump($result);
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('surname', $result);

@@ -1,7 +1,8 @@
 <?php
 
-namespace MarioDevv\LaravelDocumentDetector\services;
+namespace MarioDevv\LaravelDocumentDetector\Services;
 
+use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 use MarioDevv\LaravelDocumentDetector\Contracts\PreprocessorInterface;
 
@@ -11,19 +12,18 @@ class ImagePreprocessor implements PreprocessorInterface
 
     public function __construct()
     {
-        $this->manager = new ImageManager(['driver' => 'imagick']);
+        $this->manager = ImageManager::imagick();
     }
 
     public function preprocess(string $path): Image
     {
-        $img = $this->manager->make($path)
-            ->resize(null, 2000, fn($c) => $c->aspectRatio())
+        return $this->manager
+            ->read($path)
+            ->resize(null, 2000)
             ->greyscale()
             ->brightness(-10)
             ->contrast(20)
             ->rotate(-$this->detectSkew($path));
-
-        return $img;
     }
 
     private function detectSkew(string $path): float

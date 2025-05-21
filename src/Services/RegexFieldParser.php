@@ -1,6 +1,6 @@
 <?php
 
-namespace MarioDevv\LaravelDocumentDetector\services;
+namespace MarioDevv\LaravelDocumentDetector\Services;
 
 use MarioDevv\LaravelDocumentDetector\Contracts\ParserInterface;
 

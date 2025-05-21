@@ -1,11 +1,13 @@
 <?php
 
-namespace MarioDevv\LaravelDocumentDetector\services;
+namespace MarioDevv\LaravelDocumentDetector\Services;
 
 use Google\ApiCore\ApiException;
 use Google\Cloud\DocumentAI\V1\Client\DocumentProcessorServiceClient;
+use Intervention\Image\Image;
+use MarioDevv\LaravelDocumentDetector\Contracts\DocumentRegionDetectorInterface;
 
-class DocumentAIRegionDetector
+class DocumentAIRegionDetector implements DocumentRegionDetectorInterface
 {
     protected DocumentProcessorServiceClient $docAI;
     protected string                         $processorName;

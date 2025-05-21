@@ -10,7 +10,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "MarioDevv\\LaravelDocumentDetector\\": "src/"
+      "MarioDevv\\LaravelDocumentDetector\\": "src/",
+      "MarioDevv\\LaravelDocumentDetector\\Tests\\": "tests/"
     }
   },
   "require": {
@@ -19,6 +20,14 @@
     "illuminate/support": "^12.0",
     "intervention/image": "^3.11",
     "google/cloud-vision": "^2.0",
-    "google/cloud-document-ai": "^2.2"
+    "google/cloud-document-ai": "^2.2",
+    "phpoption/phpoption": "^1.9"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "scripts": {
+    "tests": "vendor/bin/phpunit tests"
   }
 }

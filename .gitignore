@@ -31,3 +31,5 @@ auth.json
 
 .idea
 composer.lock
+/document.png
+/ocr_credentials.json

@@ -32,7 +32,7 @@ class DocumentDetectorIntegrationTest extends TestCase
         $result = $detector->scan(__DIR__ . '/../../documents/de/german2.png');
 
         $this->assertArrayHasKey('name', $result);
-        $this->assertArrayHasKey('surname', $result);
-        $this->assertArrayHasKey('id_number', $result);
+        $this->assertArrayHasKey('idCardNumber', $result);
+        $this->assertArrayHasKey('countryISO', $result);
     }
 }

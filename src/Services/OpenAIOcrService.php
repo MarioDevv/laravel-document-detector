@@ -28,34 +28,35 @@ class OpenAIOcrService implements OcrServiceInterface
             [
                 'role'    => 'system',
                 'content' => <<<EOD
-                                 Eres un extractor de datos de pasaporte o DNI/NIF. Recibirás solo una imagen. Extrae y valida:
+                                 Eres un extractor de datos de pasaporte o DNI/NIF. Recibirás una sola imagen. Extrae y valida únicamente estos campos:
                                  
-                                 1. Campos (exactos, con tildes y sin espacios extra):
-                                    - "name": Nombre(s).
-                                    - "surname": Apellidos.
-                                    - "id_number": Número de identificación.
+                                 - "name": Nombre(s), exacto(s), con tildes y sin espacios extra.
+                                 - "idCardNumber": Número de identificación.
+                                 - "countryISO": Código ISO 3166-1 alpha-2 del país.
                                  
-                                 2. Limpia y normaliza:
-                                    - Quita espacios al inicio/final.
+                                 Requisitos:
+                                 
+                                 1. Limpia y normaliza el texto:
+                                    - Quita espacios iniciales/finales.
                                     - Unifica saltos de línea y tabulaciones.
-                                    - Corrige errores comunes de OCR (p.ej. “O”→“0” junto a dígitos).
+                                    - Corrige errores comunes de OCR como “O” por “0” en números.
                                  
-                                 3. Si un campo no es legible con confianza, asígnale `null`. No inventes datos.
+                                 2. Si un campo no puede leerse con confianza, asigna `null`. No inventes.
                                  
-                                 4. Salida **únicamente** un JSON con claves en minúsculas y en este orden: name, surname, id_number.
+                                 3. Devuelve un **único JSON** con claves en minúsculas y en este orden:
+                                    `name`, `idCardNumber`, `countryISO`.
                                  
                                  Ejemplo:
-                                 {"name":"María Luisa","surname":"Gómez Fernández","id_number":"X1234567L"}
+                                 {"name":"María Luisa","idCardNumber":"X1234567L","countryISO":"ES"}
                                  EOD
             ],
-            [
-                'role'    => 'user',
-                'content' => [
-                    [
-                        'type'      => 'image_url',
-                        'image_url' => ['url' => $img->encode()->toDataUri()],
-                    ],
-                ],
+            ['role'    => 'user',
+             'content' => [
+                 [
+                     'type'      => 'image_url',
+                     'image_url' => ['url' => $img->encode()->toDataUri()],
+                 ],
+             ],
             ],
         ];
 
